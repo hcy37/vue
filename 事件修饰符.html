@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{num}}</div>
+        <div @click="h0">
+            <button @click.stop="h1">点击1</button>
+            <a href="http://www.baidu.com" @click.stop.prevent="h2">百度</a>
+            <!-- .stop阻止冒泡 .prevent阻止默认行为 -->
+        </div>
+        <input type="text" @keyup.delete="del" v-model="uname">
+        <!-- 按键修饰符 -->
+    </div>
+    <script>
+        var vt = new Vue({
+            el: '#app',
+            data: {
+                num: 0,
+                uname: ''
+            },
+            methods: {
+                h0: function() {
+                    this.num++
+                        console.log(this.num);
+                },
+                h1: function(e) {
+                    // e.stopPropagation()
+
+                },
+                h2: function(e) {
+                    // e.preventDefault()
+                },
+                submit: function() {
+                    alert('已提交')
+                },
+                del: function() {
+                    this.uname = ''
+                }
+
+
+            }
+        })
+    </script>
+</body>
+
+</html>

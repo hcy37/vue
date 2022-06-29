@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <span v-pre>{{msg }}</span>//v-pre可以显示原始信息，比如键值表达式 -->
+        <!-- <div v-text="msg" v-once></div> -->
+        <!-- v-once数据响应式改变，数据不会改变,这样可以 提高性能 -->
+        <!-- <div>{{hhhhhh}}</div> -->
+        <!-- <div v-html="msg"></div>//有安全隐患  -->
+        <div v-text="msg"></div>
+        <input type="text" name="" id="" v-model="msg">
+        <!-- v-model双向数据绑定 当数据变化，msg也变化；当msg变化，数据也变化 ，限制在 input select textarea 中使用-->
+        <!-- MVVM设计思想 M(model) V(view) VM(View-Model) -->
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello Vue'
+            }
+        })
+    </script>
+</body>
+
+</html>

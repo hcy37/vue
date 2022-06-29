@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="add($event,123)">点击1</button>
+        <!-- $event可以获取事件触发对象 -->
+        <button v-on:click="add">点击2</button>
+        <!-- @click用的比较多 -->
+        <span v-text="num"></span>
+    </div>
+    <script>
+        var vt = new Vue({
+            el: '#app',
+            data: {
+                msg: '',
+                num: 0
+            },
+            methods: {
+                add: function($event, p) {
+                    this.num++
+                        console.log(this === vt);
+                    console.log(p);
+                    console.log(this);
+                    console.log(event.target.innerHTML);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
