@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .active {
+            border: 1px solid red;
+            width: 100px;
+            height: 100px;
+        }
+        
+        .text {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <a :href="msg">百度</a>
+        <!-- v-bind用于响应式地更新HTML,比如地址  可以简写:href-->
+        <button @click="toggle">切换</button>
+        <div v-bind:class="[active,{text:t}]">浩浩乎</div>
+        <button @click="concle">取消</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'http://www.baidu.com',
+                active: 'active',
+                t: true
+            },
+            methods: {
+                toggle: function() {
+                    this.msg = 'https://www.bilibili.com/'
+                },
+                concle: function() {
+                    this.t = !this.t
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

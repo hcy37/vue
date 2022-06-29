@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="md">
+        <input type="text" @input="cl" v-bind:value="msg">
+        <input type="text" @input="msg=$event.target.value" v-bind:value="msg">
+        <span v-text="msg"></span>
+    </div>
+    <script>
+        var md = new Vue({
+            el: '#md',
+            data: {
+                msg: ''
+            },
+            methods: {
+                cl: function(e) {
+                    this.msg = e.target.value
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

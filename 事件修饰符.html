@@ -18,9 +18,12 @@
             <!-- .stop阻止冒泡 .prevent阻止默认行为 -->
         </div>
         <input type="text" @keyup.delete="del" v-model="uname">
+        <input type="text" @keyup.aaa="code">
         <!-- 按键修饰符 -->
     </div>
     <script>
+        // 自定义按键修饰符,，名字是自定义，值是固定的ASII值
+        Vue.config.keyCodes.aaa = 65
         var vt = new Vue({
             el: '#app',
             data: {
@@ -44,6 +47,9 @@
                 },
                 del: function() {
                     this.uname = ''
+                },
+                code: function(e) {
+                    console.log(e.keyCode);
                 }
 
 

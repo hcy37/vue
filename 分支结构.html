@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <span v-if="score>90">优秀</span>
+        <span v-else-if="score<90&&score>=80">良好</span>
+        <span v-else-if="score<80&&score>=60">一般</span>
+        <span v-else>比较差</span>
+        <span v-show="flag">浩浩乎</span>
+    </div>
+    <!-- v-show本质是display none v-if是向DOM树内添加或者删除DOM元素 -->
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                score: 1000,
+                flag: false
+            }
+        })
+    </script>
+</body>
+
+</html>

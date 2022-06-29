@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in msg">{{item+'-------'+index}}</li>
+        </ul>
+        <ul>
+            <!-- key的作用：帮助Vue区分不同的元素，从而提高性能 -->
+
+            <li :key="item.id" v-for="item in yc">
+                <span>{{item.c}}</span>
+                <span>{{item.e}}</span>
+
+            </li>
+        </ul>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: ['杭州', '宁波', '温州'],
+                yc: [{
+                    id: 1,
+                    c: '杭州',
+                    e: 'hz'
+                }, {
+                    id: 2,
+                    c: '宁波',
+                    e: 'nb'
+                }, {
+                    id: 3,
+                    c: '温州',
+                    e: 'wz'
+                }]
+            }
+        })
+    </script>
+</body>
+
+</html>
