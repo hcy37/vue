@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="msg">
+        <div>{{msg|upper}}</div>
+        <div>{{msg|lower}}</div>
+
+    </div>
+    <script>
+        // 过滤器作用：格式化数据，比如将字符串格式化为字母大写，将日期格式化为指定的格式
+        // Vue.filter('upper', function(val) {
+        //     return val.charAt(0).toUpperCase() + val.slice(1)
+        // })
+        Vue.filter('lower', function(val) {
+            return val.charAt(0).toLowerCase() + val.slice(1)
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: ""
+            },
+            filters: {
+                upper: function(val) {
+                    return val.charAt(0).toUpperCase() + val.slice(1)
+                }
+            },
+            methods: {}
+        })
+    </script>
+</body>
+
+</html>

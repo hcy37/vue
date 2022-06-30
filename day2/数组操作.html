@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="msg"><button @click="add">添加</button> <button @click="del">删除</button>
+        <ul>
+            <li v-for="(item,index) in fru">{{item}}</li>
+        </ul>
+    </div>
+    <script>
+        //变异方法  修改原有数据
+        //替换数组 生成新的数组  
+
+        var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: '',
+                    fru: ['卤粉', '臭豆腐', '卤菜', '大闸蟹']
+                },
+                methods: {
+                    add: function() {
+                        this.fru.push(this.msg)
+                            // console.log(this.msg);
+                    },
+                    del: function() {
+                        this.fru.pop()
+                    }
+                }
+            })
+            // 响应式修改
+            // Vue.set(vm.fru, 2, '小龙虾')
+        vm.$set(vm.fru, 2, '小龙虾')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{date|filterA('yyyy-mm-dd')}}
+    </div>
+    <script>
+        Vue.filter('filterA', function(value, arg) {
+            if (arg == 'yyyy-mm-dd') {
+                var ret = ''
+                ret += value.getFullYear() + '-' + (value.getMonth() + 1) + '-' + value.getDate()
+                return ret
+            }
+            return value
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                date: new Date()
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

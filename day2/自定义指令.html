@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <input type="text" v-focus> -->
+        <input type="text" v-color="msg">
+        <input type="text" v-focus>
+        <input type="text" v-focus>
+
+    </div>
+    <script>
+        // Vue.directive('focus', {
+        //         inserted: function(el) {
+        //             el.focus()
+        //         }
+        //     }) //自定义属性
+        // Vue.directive('color', {
+        //     bind: function(el, binding) {
+        //         // console.log(binding.value);
+        //         el.style.backgroundColor = binding.value
+        //     }
+        // })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'pink'
+            },
+            methods: {},
+            directives: { //局部指令
+                color: {
+                    bind: function(el, binding) {
+                        // console.log(binding.value);
+                        el.style.backgroundColor = binding.value
+                    }
+                },
+                focus: {
+                    inserted: function(el) {
+                        el.focus()
+                    }
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>
