@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="todoapp">
+        <section id="todoapp" class="todoapp">
+            <header class="header">
+                <h1>todos</h1>
+                <input placeholder="What needs to be done?" class="new-todo" v-model="msg" @keyup.13="submit">
+            </header>
+            <section class="main">
+                <input id="toggle-all" type="checkbox" class="toggle-all">
+                <label for="toggle-all">Mark all as complete</label>
+                <ul class="todo-list">
+                    <!-- <li class="">
+                    <div class="view"><input type="checkbox" class="toggle">
+                        <label>吃饭</label>
+                        <button class="destroy"></button>
+                    </div>
+                    <input class="edit">
+                </li>
+                <li class="">
+                    <div class="view">
+                        <input type="checkbox" class="toggle">
+                        <label>睡觉</label>
+                        <button class="destroy"></button>
+                    </div> <input class="edit"></li>
+                <li class="completed">
+                    <div class="view">
+                        <input type="checkbox" class="toggle">
+                        <label>打豆豆</label>
+                        <button class="destroy">
+                        </button></div>
+                    <input class="edit">
+                </li> -->
+                    <li :key="index" v-for="(item,index) in todos" v-bind:class="{completed:item.completed}">
+                        <div class="view">
+                            <input type="checkbox" class="toggle">
+                            <label>{{item.title}}</label>
+                            <button class="destroy" @click=""></button>
+                        </div> <input class="edit">
+                    </li>
+                </ul>
+            </section>
+            <footer class="footer">
+                <span class="todo-count">
+                <strong>{{num}}</strong> item left</span>
+                <ul class="filters">
+                    <li><a href="#/" class="selected">All</a></li>
+                    <li><a href="#/active">Active</a></li>
+                    <li><a href="#/completed">Completed</a></li>
+                </ul>
+                <button class="clear-completed">Clear completed</button>
+            </footer>
+        </section>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#todoapp",
+            data: {
+                msg: '',
+                todos: []
+            },
+            methods: {
+                submit: function() {
+                    var obj = {
+                        id: this.num++,
+                        title: this.msg,
+                        completed: false
+                    }
+                    this.todos.push(obj)
+                    console.log(this.todos);
+                }
+            },
+            computed: {
+                num: function() {
+                    return this.todos.length
+                }
+            },
+            mounted: function() {
+                var data = [{
+                    id: 1,
+                    title: '吃饭',
+                    completed: false
+                }, {
+                    id: 2,
+                    title: '睡觉',
+                    completed: false
+                }, {
+                    id: 3,
+                    title: '打豆豆',
+                    completed: true
+                }]
+                this.todos = data
+            }
+        })
+    </script>
+</body>
+
+</html>
