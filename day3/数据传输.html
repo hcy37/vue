@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <div>{{pmsg}},{{pcont}}</div> -->
+        <hcy pmsg="未曾" pcont="用过"></hcy>
+        <hcy :pmsg="pmsg" :pcont="pcont"></hcy>
+    </div>
+    <script>
+        Vue.component('hcy', {
+            data: function() {
+                return {
+                    msg: 'zi'
+                }
+            },
+            template: ' <div>{{msg}}--{{pmsg}}--{{pcont}}</div>',
+            props: ['pmsg', 'pcont']
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                pmsg: [{
+                    name: 'zs',
+                    age: 18
+                }],
+                pcont: '浩浩乎'
+            }
+
+        })
+    </script>
+</body>
+
+</html>

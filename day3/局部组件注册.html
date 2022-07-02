@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <hell-a></hell-a>
+        <hell-b></hell-b>
+        <hell-c></hell-c>
+        <test-com></test-com>
+        <!-- <my-component></my-component> -->
+
+    </div>
+    <script>
+        Vue.component('test-com', {
+
+            template: ' <div>hhhhh </div>'
+        })
+        var hella = {
+            data: function() {
+                return {
+                    msg: 'helloa'
+                }
+            },
+            template: '<div>{{msg}}</div>'
+        }
+        var hellb = {
+            data: function() {
+                return {
+                    msg: 'hellob'
+                }
+            },
+            template: '<div>{{msg}}</div>'
+        }
+        var hellc = {
+            data: function() {
+                return {
+                    msg: 'hellod'
+                }
+            },
+            template: '<div>{{msg}}</div>'
+        }
+
+
+        new Vue({
+                el: '#app',
+                components: {
+                    'hell-a': hella,
+                    'hell-b': hellb,
+                    'hell-c': hellc
+
+
+                }
+            })
+            // 定义组件的模板
+    </script>
+</body>
+
+</html>

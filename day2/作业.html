@@ -20,7 +20,7 @@
                 <input placeholder="What needs to be done?" class="new-todo" v-model="msg" @keyup.13="submit">
             </header>
             <section class="main">
-                <input id="toggle-all" type="checkbox" class="toggle-all">
+                <input id="toggle-all" type="checkbox" class="toggle-all" v-model="addT">
                 <label for="toggle-all">Mark all as complete</label>
                 <ul class="todo-list">
                     <!-- <li class="">
@@ -44,11 +44,11 @@
                         </button></div>
                     <input class="edit">
                 </li> -->
-                    <li :key="index" v-for="(item,index) in todos" v-bind:class="{completed:item.completed}">
+                    <li :key="index" v-for="(item,index) in todos" v-bind:class="{completed:item.completed}" @dblclick="edit(index)" v-bind:class="{editing:editing}">
                         <div class="view">
-                            <input type="checkbox" class="toggle">
+                            <input type="checkbox" class="toggle" v-model="item.completed">
                             <label>{{item.title}}</label>
-                            <button class="destroy" @click=""></button>
+                            <button class="destroy" @click="del(index)"></button>
                         </div> <input class="edit">
                     </li>
                 </ul>
@@ -69,23 +69,41 @@
         var vm = new Vue({
             el: "#todoapp",
             data: {
+                editing: false,
+                cf: false,
                 msg: '',
                 todos: []
             },
             methods: {
                 submit: function() {
                     var obj = {
-                        id: this.num++,
                         title: this.msg,
                         completed: false
                     }
                     this.todos.push(obj)
-                    console.log(this.todos);
+                    this.msg = ''
+                },
+                del: function(index) {
+                    console.log(index);
+                    this.todos.splice(index, 1)
+                },
+                edit: function(index) {
+                    console.log(index);
                 }
             },
             computed: {
                 num: function() {
-                    return this.todos.length
+                    return this.todos.filter(item => !item.completed).length
+                },
+                addT: {
+                    get() {
+                        return this.todos.every(item => item.completed);
+                    },
+                    set(val) {
+                        this.todos.forEach(todo => todo.completed = val)
+                    }
+
+
                 }
             },
             mounted: function() {
