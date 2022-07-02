@@ -7,10 +7,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="js/vue.js"></script>
+    <style>
+        .current {
+            color: rgb(210, 82, 12);
+        }
+    </style>
 </head>
 
 <body>
+    <div id="app">
+        <fruit-list :fruit="fruit">
+            <template slot-scope="slotProps">
+               <strong class="current" v-if="slotProps.info.id==2">{{slotProps.info.name}}
+               </strong> 
+               <span v-else>{{slotProps.info.name}}</span>
+            </template>
+        </fruit-list>
+    </div>
+    <script>
+        Vue.component('fruit-list', {
+            props: ['fruit'],
+            template: `
+        <ul>
+        <li :key="item.id" v-for="item in fruit">
+        <slot :info="item">{{item.name}}</slot>        
+            </li>
+            
+        </ul>
+        `,
 
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                fruit: [{
+                    id: 1,
+                    name: 'apple'
+                }, {
+                    id: 2,
+                    name: 'orange'
+                }, {
+                    id: 3,
+                    name: 'banana'
+                }]
+            },
+
+        })
+    </script>
 </body>
 
 </html>

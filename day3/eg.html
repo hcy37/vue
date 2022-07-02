@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <c-c></c-c>
+
+    </div>
+    <script>
+        Vue.component('c-c', {
+            data: function() {
+                return {
+                    msg: [{
+                        id: 1,
+                        name: 'ls'
+                    }, {
+                        id: 2,
+                        name: 'ws'
+                    }, {
+                        id: 3,
+                        name: 'fs'
+                    }]
+                }
+            },
+            template: `
+            <ul>
+            <li :key="item.id" v-for="item in msg">{{item.id}},{{item.name}}</li>
+        </ul>
+            `
+
+
+        })
+        var vm = new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+
+</html>
