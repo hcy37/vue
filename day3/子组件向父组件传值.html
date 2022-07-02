@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div :style='{fontSize:fontSize+"px"}'>{{pmsg}}</div>
+        <m-i @ex="handle($event)" :parr="parr"></m-i>
+
+    </div>
+    <script>
+        Vue.component(
+            'm-i', {
+                props: ['parr'],
+                template: `
+                <div>
+            <button @click="$emit('ex',5)">扩大</button>
+            <ul>
+            <li :key="index" v-for="(item,index) in parr">{{item}}</li>
+        </ul>
+            </div>
+            `
+            }
+
+        )
+        var vm = new Vue({
+            el: '#app',
+
+            data: {
+                fontSize: 10,
+                pmsg: '浩浩乎',
+                parr: ['小龙虾', '大闸蟹']
+            },
+            methods: {
+                handle: function(val) {
+
+                    this.fontSize += val
+                    console.log(this.fontSize);
+                }
+            }
+        })
+    </script>
+
+
+</body>
+
+</html>

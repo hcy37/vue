@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <a-b>有个bug发生</a-b>
+        <a-b>有个警告</a-b>
+        <a-b></a-b>
+
+    </div>
+    <script>
+        Vue.component('a-b', {
+                template: `
+            <div>
+        <strong>ERROR:</strong>
+        
+        <slot>默认内容</slot> 
+    </div>
+            `
+            })
+            //  当组件渲染的时候，这个 <slot> 元素将会被替换为“组件标签中嵌套的内容”。
+            //  插槽内可以包含任何模板代码，包括 HTML
+        var vm = new Vue({
+            el: '#app',
+            data: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

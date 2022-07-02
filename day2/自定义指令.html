@@ -11,10 +11,12 @@
 
 <body>
     <div id="app">
-        <!-- <input type="text" v-focus> -->
-        <input type="text" v-color="msg">
+        <!-- <input type="text" v-f> -->
+        <!-- <input type="text" v-color="msg">
         <input type="text" v-focus>
-        <input type="text" v-focus>
+        <input type="text" v-focus> -->
+        <input type="text" v-c="msg">
+        <h1 v-c="msg">哈哈哈哈</h1>
 
     </div>
     <script>
@@ -29,26 +31,41 @@
         //         el.style.backgroundColor = binding.value
         //     }
         // })
+        Vue.directive('c', {
+            // inserted: function(el) {
+
+
+            // el.style.backgroundColor = 'pink'
+            // console.log(el);
+            // }
+            bind: function(el, binding) {
+                console.log(binding.value.color);
+                el.style.backgroundColor = binding.value.color
+            }
+        })
+
         var vm = new Vue({
             el: '#app',
             data: {
-                msg: 'pink'
+                msg: {
+                    color: 'blue'
+                }
             },
             methods: {},
-            directives: { //局部指令
-                color: {
-                    bind: function(el, binding) {
-                        // console.log(binding.value);
-                        el.style.backgroundColor = binding.value
-                    }
-                },
-                focus: {
-                    inserted: function(el) {
-                        el.focus()
-                    }
-                }
+            // directives: { //局部指令
+            //     color: {
+            //         bind: function(el, binding) {
+            //             // console.log(binding.value);
+            //             el.style.backgroundColor = binding.value
+            //         }
+            //     },
+            //     focus: {
+            //         inserted: function(el) {
+            //             el.focus()
+            //         }
+            //     }
 
-            }
+            // }
         })
     </script>
 </body>
