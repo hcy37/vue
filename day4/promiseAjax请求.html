@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body>
+    <script>
+        function queryDate(url) {
+            var p = new Promise(function(res, rej) {
+                var xhr = new XMLHttpRequest()
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState != 4) return
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        res(xhr.responseText)
+                    } else {
+                        rej('服务器错误')
+                    }
+
+                }
+                xhr.open('get', url)
+                xhr.send(null)
+            })
+            return p
+        }
+        queryDate('http://localhost:3000/data')
+            .then(function(data) {
+                console.log(data);
+                return queryDate('http://localhost:3000/data1')
+            })
+            .catch(function(data) {
+                console.log(data);
+            })
+            .finally(function() {
+                console.log('已完成');
+            })
+            .then(function(data) {
+                console.log(data);
+                return queryDate('http://localhost:3000/data2')
+            })
+            .then(function(data) {
+                console.log(data);
+            })
+    </script>
+</body>
+
+</html>

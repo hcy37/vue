@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function queryDate(url) {
+            return new Promise(function(res, rej) {
+                var xhr = new XMLHttpRequest()
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState !== 4) return
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        res(xhr.responseText)
+                    } else {
+                        rej('服务信息')
+                    }
+                }
+                xhr.open('get', url)
+                xhr.send(null)
+            })
+        }
+        var p1 = queryDate('http://localhost:3000/a1')
+        var p2 = queryDate('http://localhost:3000/a2')
+        var p3 = queryDate('http://localhost:3000/a3')
+        Promise.race([p1, p2, p3]).then(function(result) {
+            console.log(result);
+        })
+        Promise.all([p1, p2, p3]).then(function(result) {
+                console.log(result);
+            })
+            //arr只能全部得到才返回；race得到一个就返回，但是不会停止接收
+    </script>
+</body>
+
+</html>

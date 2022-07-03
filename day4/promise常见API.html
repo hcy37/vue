@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <script>
+        function foo() {
+            return new Promise(function(res, rej) {
+                setTimeout(function() {
+                    // res(123) 
+                    rej('error')
+                }, 1000)
+            })
+        }
+        // foo()
+        //     .then(function(data) {//成功信息
+        //         console.log(data);
+        //     })
+        //     .catch(function(data) {//获取异常
+        //         console.log(data);
+        //     })
+        //     .finally(function() {//成功与否都发送信息
+        //         console.log('已完成');
+        //     })
+        foo()
+            .then(function(data) {
+                console.log(data);
+            }, function(data) {
+                console.log(data);
+            })
+
+        .finally(function() {
+            console.log('已完成');
+        })
+    </script>
+</body>
+
+</html>
