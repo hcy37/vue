@@ -14,38 +14,36 @@
         <div>
             <span>名：</span>
             <span> 
-                <input type="text" v-model="firstName">
+                <input type="text" v-model="m">
             </span>
         </div>
         <div>
             <span>姓：</span>
             <span> 
-                <input type="text" v-model="lastName">
+                <input type="text" v-model="x">
             </span>
         </div>
-        <div>{{fullName}}</div>
+        <div>{{qm}}</div>
     </div>
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                firstName: 'Jim',
-                lastName: 'Green',
-                fullName: 'Jim Green'
+                m: 'cy',
+                x: 'h',
+                qm: 'hcy'
             },
-            // computed: {
-            //     fullName: function() {
-            //         return this.firstName + '' + this.lastName
-            //     }
-            // },
             watch: {
-                firstName: function(val) {
-                    this.fullName = val + '' + this.lastName
+                m: function(val) {
+                    // console.log(val);
+                    this.qm = val + this.x
                 },
-                lastName: function(val) {
-                    this.fullName = this.firstName + '' + val
+                x: function(val) {
+                    this.qm = this.m + val
                 }
+
             }
+
         })
     </script>
 </body>

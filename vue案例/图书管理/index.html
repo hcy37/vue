@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="js/vue.js"></script>
+    <script src="js/time.js"></script>
     <style type="text/css">
         .grid {
             margin: auto;
@@ -56,18 +58,18 @@
                         <label for="id">
                   编号：
                 </label>
-                        <input type="text" id="id">
+                        <input type="text" id="id" v-model="bid" :disabled="flag" v-focus>
                         <label for="name">
                   名称：
                 </label>
-                        <input>
-                        <button>提交</button>
+                        <input v-model="bn">
+                        <button @click="submit">提交</button>
                     </div>
                 </div>
             </div>
             <div class="total">
                 <span>图书总数：</span>
-                <span></span>
+                <span>{{num}}</span>
             </div>
             <table>
                 <thead>
@@ -79,20 +81,106 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr :key="item.id" v-for="(item,index) in books">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.date|time('Y-M-D h:m:s')}}</td>
                         <td>
-                            <a href="">修改</a>
+                            <a href="" @click.prevent="edit(item.id,item.name)">修改</a>
                             <span>|</span>
-                            <a href="">删除</a>
+                            <a href="" @click.prevent="del(index)">删除</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+
+
+    <script>
+        //自定义指令
+
+        Vue.directive('focus', {
+                inserted: function(el) {
+                    el.focus()
+                }
+            })
+            //过滤器
+        Vue.filter('time', function(val, reg) {
+            return timestampToTime(val, reg)
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false,
+                bn: '',
+                bid: '',
+                books: [{
+                    id: 1,
+                    name: '三国演义',
+                    date: 2525609975000
+                }, {
+                    id: 2,
+                    name: '水浒传',
+                    date: 2525609975000
+                }, {
+                    id: 3,
+                    name: '红楼梦',
+                    date: 2525609975000
+                }, {
+                    id: 4,
+                    name: '西游记',
+                    date: 252560997500
+                }]
+
+            },
+
+            methods: {
+                submit: function() {
+                    if (this.flag === true) {
+                        this.books.some((item) => {
+                            var that = this
+                            if (this.bid === item.id) {
+                                if (this.bn === item.name) {
+                                    alert('已经重名了')
+                                    return true
+                                }
+                                item.name = this.bn
+                            }
+                        })
+                        this.flag = false
+                    } else {
+                        var timer = new Date()
+                        bd = {
+                            id: this.bid,
+                            name: this.bn,
+                            date: timer.getTime()
+                        }
+                        console.log(bd);
+                        this.books.push(bd)
+                    }
+                    this.bn = ''
+                    this.bid = ''
+                },
+                del: function(id) {
+                    this.books.splice(id, 1)
+                },
+                edit: function(id, name) {
+                    this.flag = true
+                        // console.log(id);
+                        // console.log(id, name);
+                    this.bid = id
+                    this.bn = name
+                }
+            },
+            computed: {
+                num: function() {
+                    return this.books.length
+                }
+            }
+
+        })
+    </script>
 </body>
 
 </html>

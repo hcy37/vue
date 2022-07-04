@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+
+</head>
+
+<body>
+    <script src="js/router.js"></script>
+    <div id="app">
+        <router-link to="/user">user</router-link>
+        <router-link to="/register">register</router-link>
+        <router-view></router-view>
+
+    </div>
+    <script>
+        const User = {
+
+            template: ' <h1>user组件</h1>'
+        }
+        const Register = {
+
+            template: `
+        <div>
+            <h1>register组件</h1>
+            <hr>
+            <router-link to="/tab1">tab1</router-link>
+            <router-link to="/tab2">tab2</router-link>
+            <router-view></router-view>
+            </div> 
+            `
+        }
+        const tab1 = {
+            template: `
+            <div>
+           
+            <h1>tab1</h1>
+        </div> 
+            `
+        }
+        const tab2 = {
+            template: `
+            <div>
+            
+            <h1>tab2</h1>
+        </div> 
+            `
+        }
+        const router = new VueRouter({
+            routes: [{
+                path: '/',
+                redirect: '/user'
+            }, {
+                path: '/user',
+                component: User
+            }, {
+                path: '/register',
+                component: Register,
+                children: [{
+                    path: '/tab1',
+                    component: tab1
+                }, {
+                    path: '/tab2',
+                    component: tab2
+                }]
+            }, ]
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            router
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <script src="js/router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+        <router-link to="/user/1">user1</router-link>
+        <router-link to="/user/2">user2</router-link>
+        <router-link to="/user/3">user3</router-link>
+        <router-link to="/user/4">user4</router-link>
+        <router-link :to="{name:'user',params:{id:5}}">user</router-link>
+        <router-link to="/register">register</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        const user = {
+            props: ['uname', 'age', 'id'],
+            template: '<h1>用户名为:{{uname}},id:{{id}},年龄:{{age}}</h1>'
+        }
+        const register = {
+            template: '<h1>注册</h1>'
+        }
+        const router = new VueRouter({
+            routes: [
+                //     {
+                //     path: '/user/:uid',
+                //     component: user,
+                //     props: true
+                // }//布尔值
+                // {
+                //     path: '/user/:uid',
+                //     component: user,
+                //     props: {
+                //         uname: 'lisi',
+                //         age: 14,
+                //         id: uid
+                //     } //对象
+                // },
+                {
+
+                    path: '/user/:id',
+                    name: 'user',
+                    component: user,
+                    props: route => ({
+                            uname: 'zs',
+                            age: 20,
+                            id: route.params.id
+                        }) //函数
+                }, {
+                    path: '/register',
+                    component: register
+                }, {
+                    path: '/',
+                    redirect: '/user'
+                }
+            ]
+
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            router
+        })
+    </script>
+</body>
+
+</html>

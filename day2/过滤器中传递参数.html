@@ -7,28 +7,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="js/vue.js"></script>
+    <!-- <script src="js/time.js"></script> -->
 </head>
 
 <body>
     <div id="app">
-        {{date|filterA('yyyy-mm-dd')}}
+        <div>{{msg|ymd('Y-M-D h:m:s')}}</div>
     </div>
     <script>
-        Vue.filter('filterA', function(value, arg) {
-            if (arg == 'yyyy-mm-dd') {
-                var ret = ''
-                ret += value.getFullYear() + '-' + (value.getMonth() + 1) + '-' + value.getDate()
-                return ret
+        function timestampToTime(time, format) {
+            let timestamp;
+            timestamp = time.length === 10 ? time * 1000 : time;
+            if (!format) {
+                format = "Y-M-D h:m:s";
             }
-            return value
+            var formateArr = ['Y', 'M', 'D', 'h', 'm', 's'];
+            var returnArr = [];
+            var date = new Date(timestamp);
+            returnArr.push(date.getFullYear());
+            var m = date.getMonth() + 1;
+            returnArr.push(m < 10 ? ('0' + m) : m);
+            var d = date.getDate();
+            returnArr.push(d < 10 ? ('0' + d) : d);
+            var h = date.getHours();
+            returnArr.push(h < 10 ? ('0' + h) : h);
+            var m = date.getMinutes();
+            returnArr.push(m < 10 ? ('0' + m) : m);
+            var s = date.getSeconds();
+            returnArr.push(s < 10 ? ('0' + s) : s);
+            for (var i in returnArr) {
+                format = format.replace(formateArr[i], returnArr[i]);
+            }
+            return format;
+        }
+        Vue.filter('ymd', function(val, reg) {
+
+            return timestampToTime(val, reg)
+
+            // console.log(val);
+            // var ret = ''
+            // ret += val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate()
+            // return ret
         })
-        var vm = new Vue({
+        const vm = new Vue({
             el: '#app',
             data: {
-                date: new Date()
-            },
-            methods: {
-
+                msg: new Date().getTime()
             }
         })
     </script>

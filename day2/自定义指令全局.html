@@ -11,21 +11,17 @@
 
 <body>
     <div id="app">
-        <div>{{msg}}</div>
-        <div>{{re}}</div>
+        <input type="text" v-focus>
     </div>
-    <script>
-        var vm = new Vue({
-            el: '#app',
-            data: {
-                msg: '你好'
-            },
-            computed: {
-                re: function() {
-                    return this.msg.split('').reverse().join('');
-                }
-            }
 
+    <script>
+        Vue.directive('focus', {
+            inserted: function(el) {
+                el.focus()
+            }
+        })
+        const vm = new Vue({
+            el: '#app'
         })
     </script>
 </body>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+
+        <a href="#/zhuye">主页</a>
+        <a href="#/keji">科技</a>
+        <a href="#/youxi">游戏</a>
+        <a href="#/jiaoyu">教育</a>
+        <component :is="aurl"></component>
+    </div>
+    <script>
+        const zhuye = {
+            template: '<h1>主页信息</h1>'
+        }
+        const keji = {
+            template: '<h1>科技信息</h1>'
+        }
+        const youxi = {
+            template: '<h1>游戏信息</h1>'
+        }
+        const jiaoyu = {
+            template: '<h1>教育信息</h1>'
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                aurl: 'zhuye'
+            },
+            components: {
+                zhuye,
+                keji,
+                youxi,
+                jiaoyu
+            }
+        })
+        window.onhashchange = function() {
+            console.log(location.hash.substr(2));
+            // console.log(vm.aurl);
+            vm.aurl = location.hash.substr(2)
+        }
+    </script>
+</body>
+
+</html>

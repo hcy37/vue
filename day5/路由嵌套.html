@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <script src="js/router.js"></script>
+</head>
+<div id="app">
+    <router-link to="page">首页</router-link>
+    <router-link to="login">登录</router-link>
+    <router-view></router-view>
+
+
+</div>
+
+<script>
+    const qr = {
+        template: '<h1>进入页面</h1>'
+    }
+    const zc = {
+        template: '<h1>注册页面</h1>'
+    }
+    const page = {
+        template: '<h1>首页</h1>'
+    }
+    const login = {
+        template: `
+         <div>
+        <h1>登录</h1>
+        <hr>
+<router-link to="qr">确认</router-link>
+    <router-link to="zc">注册</router-link>
+    <router-view ></router-view>
+    </div>
+        `
+    }
+    const router = new VueRouter({
+        routes: [{
+            path: '/page',
+            component: page
+        }, {
+            path: '/login',
+            component: login,
+            children: [{
+                path: '/qr',
+                component: qr
+            }, {
+                path: '/zc',
+                component: zc
+            }]
+        }, {
+            path: '/',
+            redirect: 'page'
+        }]
+    })
+    const vm = new Vue({
+        el: '#app',
+        data: {},
+        router
+    })
+</script>
+
+<body>
+
+</body>
+
+</html>
