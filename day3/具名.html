@@ -11,26 +11,36 @@
 
 <body>
     <div id="app">
-        <a-l>嗡嗡嗡</a-l>
-        <a-l>啊啊啊</a-l>
-        <a-l></a-l>
+        <b-i>
+            <div slot="footer">结尾</div>
+            <div slot="header">标题</div>
+            <div>内容</div>
+
+
+
+        </b-i>
 
     </div>
     <script>
-        const al = {
+        const bl = {
                 template: `
             <div>
-            <strong>error:</strong>
-            <slot>默认</slot>
+            <header>
+                <slot name="header"></slot>
+            </header>
+            <main>
+                <slot></slot>
+            </main>
+            <footer>
+                <slot name="footer"></slot>
+            </footer>
         </div>
             `
-            }
-            //  当组件渲染的时候，这个 <slot> 元素将会被替换为“组件标签中嵌套的内容”。
-            //  插槽内可以包含任何模板代码，包括 HTML
+            } //slot命名就是渲染顺序
         const vm = new Vue({
             el: '#app',
             components: {
-                'a-l': al
+                'b-i': bl
             }
         })
     </script>

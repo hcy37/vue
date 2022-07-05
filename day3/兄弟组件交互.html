@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <t-t :msg="fmsg"></t-t>
+        <button @click="of">销毁</button>
+        <!-- <j-j></j-j> -->
+    </div>
+    <script>
+        var hub = new Vue()
+        const tt = {
+            data() {
+                return {
+                    num: 0
+                }
+            },
+            props: ['msg'],
+            template: `
+            <div>
+            <h1>{{msg}}</h1>
+            <span>T:</span><span>{{num}}</span>
+        <button @click="add">点击</button>
+        </div>
+            `,
+            methods: {
+                add: function() {
+                    hub.$emit('t', 1)
+                },
+
+            },
+            mounted() {
+                hub.$on('t', (val) => {
+                    // console.log(val);
+                    this.num += val
+                })
+            }
+        }
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                fmsg: '父组件'
+            },
+            methods: {
+                of: function(val) {
+                    hub.$off('t')
+                }
+            },
+            components: {
+                't-t': tt,
+                // 'j-j': jj
+            }
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <m-y></m-y>
+        <n-y></n-y>
+
+    </div>
+
+    <script>
+        const my = {
+            template: ' <h1>我曾难自拔与世界之大</h1>'
+        }
+        const ny = {
+            template: '<h1>也沉迷于</h1>'
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            components: {
+                'm-y': my,
+                'n-y': ny
+            }
+        })
+    </script>
+</body>
+
+</html>

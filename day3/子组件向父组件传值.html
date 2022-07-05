@@ -11,44 +11,40 @@
 
 <body>
     <div id="app">
-        <div :style='{fontSize:fontSize+"px"}'>{{pmsg}}</div>
-        <m-i @ex="handle($event)" :parr="parr"></m-i>
 
+        <div :style="{fontSize:fs+'px'}">{{msg}}</div>
+        <m-i :dd="kd" @ex='expand($event)'></m-i>
     </div>
     <script>
-        Vue.component(
-            'm-i', {
-                props: ['parr'],
-                template: `
-                <div>
-            <button @click="$emit('ex',5)">扩大</button>
-            <ul>
-            <li :key="index" v-for="(item,index) in parr">{{item}}</li>
-        </ul>
-            </div>
+        const mi = {
+            props: ['dd'],
+            template: `
+        <div>
+            <button @click="$emit('ex',5)">{{dd}}</button>
+        
+            
+        </div>
+            
             `
-            }
-
-        )
-        var vm = new Vue({
+        }
+        const vm = new Vue({
             el: '#app',
-
             data: {
-                fontSize: 10,
-                pmsg: '浩浩乎',
-                parr: ['小龙虾', '大闸蟹']
+                fs: 10,
+                msg: '浩浩乎',
+                kd: '扩大'
             },
             methods: {
-                handle: function(val) {
-
-                    this.fontSize += val
-                    console.log(this.fontSize);
+                expand: function(val) {
+                    // console.log(val);
+                    this.fs += val
                 }
+            },
+            components: {
+                'm-i': mi
             }
         })
     </script>
-
-
 </body>
 
 </html>

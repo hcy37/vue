@@ -63,7 +63,7 @@
                   名称：
                 </label>
                         <input v-model="bn">
-                        <button @click="submit">提交</button>
+                        <button @click="submit" :disabled="sflag">提交</button>
                     </div>
                 </div>
             </div>
@@ -112,39 +112,19 @@
         const vm = new Vue({
             el: '#app',
             data: {
+                sflag: false,
                 flag: false,
                 bn: '',
                 bid: '',
-                books: [{
-                    id: 1,
-                    name: '三国演义',
-                    date: 2525609975000
-                }, {
-                    id: 2,
-                    name: '水浒传',
-                    date: 2525609975000
-                }, {
-                    id: 3,
-                    name: '红楼梦',
-                    date: 2525609975000
-                }, {
-                    id: 4,
-                    name: '西游记',
-                    date: 252560997500
-                }]
+                books: []
 
             },
 
             methods: {
                 submit: function() {
-                    if (this.flag === true) {
+                    if (this.flag) {
                         this.books.some((item) => {
-                            var that = this
                             if (this.bid === item.id) {
-                                if (this.bn === item.name) {
-                                    alert('已经重名了')
-                                    return true
-                                }
                                 item.name = this.bn
                             }
                         })
@@ -152,11 +132,11 @@
                     } else {
                         var timer = new Date()
                         bd = {
-                            id: this.bid,
-                            name: this.bn,
-                            date: timer.getTime()
-                        }
-                        console.log(bd);
+                                id: this.bid,
+                                name: this.bn,
+                                date: timer.getTime()
+                            }
+                            // console.log(bd);
                         this.books.push(bd)
                     }
                     this.bn = ''
@@ -177,6 +157,39 @@
                 num: function() {
                     return this.books.length
                 }
+            },
+            watch: {
+                bn: function(val) {
+                    var flag = this.books.some((item) => {
+                        return val === item.name
+                    })
+                    if (flag) {
+                        this.sflag = true
+                    } else {
+                        this.sflag = false
+                    }
+
+                }
+            },
+            mounted: function() {
+                var data = [{
+                    id: 1,
+                    name: '三国演义',
+                    date: 2525609975000
+                }, {
+                    id: 2,
+                    name: '水浒传',
+                    date: 2525609975000
+                }, {
+                    id: 3,
+                    name: '红楼梦',
+                    date: 2525609975000
+                }, {
+                    id: 4,
+                    name: '西游记',
+                    date: 252560997500
+                }]
+                this.books = data
             }
 
         })

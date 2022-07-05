@@ -12,16 +12,27 @@
 <body>
     <div id="app">
         <input type="text" v-focus>
+        <div v-color="msg">浩浩乎</div>
     </div>
 
     <script>
         Vue.directive('focus', {
             inserted: function(el) {
-                el.focus()
+                // el.focus()
+                // console.log(el);
+            }
+        })
+        Vue.directive('color', {
+            bind: function(el, binding) {
+                console.log(el, binding.value);
+                el.style.backgroundColor = binding.value
             }
         })
         const vm = new Vue({
-            el: '#app'
+            el: '#app',
+            data: {
+                msg: 'blue'
+            }
         })
     </script>
 </body>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+        <m-t :tmsg="pmsg" :tm="pming"></m-t>
+    </div>
+    <script>
+        const mt = {
+            props: ['tmsg', 'tm'],
+            data() {
+                return {
+                    msg: '哈哈哈'
+                }
+            },
+            template: `<h2>{{msg}},{{tmsg}}{{tm}}</h2>`
+        }
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                pmsg: '父',
+                pming: 'cy'
+            },
+            components: {
+                'm-t': mt
+            }
+        })
+    </script>
+</body>
+
+</html>
